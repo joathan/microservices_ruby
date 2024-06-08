@@ -7,3 +7,6 @@
 [submodule "orders_service"]
 	path = orders_service
 	url = git@github.com:joathan/orders_service.git
+[submodule "notifications_service"]
+	path = notifications_service
+	url = git@github.com:joathan/notifications_service.git
