@@ -24,6 +24,20 @@ services:
     volumes:
       - users_db_data:/var/lib/postgresql/data
 
+  products_service:
+    tty: true
+    stdin_open: true
+    build:
+      context: ./products_service
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3002:3000"
+    depends_on:
+      - users_db
+    volumes:
+      - ./products_service:/app
+      - bundle_cache:/usr/local/bundle
+
 networks:
   default:
     driver: bridge
