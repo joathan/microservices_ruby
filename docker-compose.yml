@@ -88,6 +88,17 @@ services:
       - ./notifications_service:/app
       - bundle_cache:/usr/local/bundle
 
+  notifications_db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: notifications_service_development
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5435:5432"
+    volumes:
+      - notifications_db_data:/var/lib/postgresql/data
+
 networks:
   default:
     driver: bridge
@@ -96,4 +107,5 @@ volumes:
   users_db_data:
   products_db_data:
   orders_db_data:
+  notifications_db_data:
   bundle_cache:
