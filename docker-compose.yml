@@ -74,6 +74,20 @@ services:
     volumes:
       - orders_db_data:/var/lib/postgresql/data
 
+  notifications_service:
+    tty: true
+    stdin_open: true
+    build:
+      context: ./notifications_service
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3004:3000"
+    depends_on:
+      - notifications_db
+    volumes:
+      - ./notifications_service:/app
+      - bundle_cache:/usr/local/bundle
+
 networks:
   default:
     driver: bridge
