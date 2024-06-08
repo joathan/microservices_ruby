@@ -1,5 +1,7 @@
 services:
   users_service:
+    tty: true
+    stdin_open: true
     build:
       context: ./users_service
       dockerfile: Dockerfile.dev
