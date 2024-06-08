@@ -33,10 +33,21 @@ services:
     ports:
       - "3002:3000"
     depends_on:
-      - users_db
+      - products_db
     volumes:
       - ./products_service:/app
       - bundle_cache:/usr/local/bundle
+
+  products_db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: products_service_development
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - products_db_data:/var/lib/postgresql/data
 
 networks:
   default:
@@ -44,4 +55,5 @@ networks:
 
 volumes:
   users_db_data:
+  products_db_data:
   bundle_cache:
