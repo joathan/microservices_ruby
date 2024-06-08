@@ -1,0 +1,31 @@
+services:
+  users_service:
+    build:
+      context: ./users_service
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3001:3000"
+    depends_on:
+      - users_db
+    volumes:
+      - ./users_service:/app
+      - bundle_cache:/usr/local/bundle
+
+  users_db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: users_service_development
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - users_db_data:/var/lib/postgresql/data
+
+networks:
+  default:
+    driver: bridge
+
+volumes:
+  users_db_data:
+  bundle_cache:
